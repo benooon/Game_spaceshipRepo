@@ -13,9 +13,9 @@ Window_Width, Window_Height = 1000,600
 
 
 def main():
-    yellowKeys = {'left_': pygame.K_d, 'right': pygame.K_g,
+    yellowKeys = {'left': pygame.K_d, 'right': pygame.K_g,
               'up': pygame.K_r, 'down': pygame.K_f}  
-    redKeys = {'left_': pygame.K_LEFT, 'right': pygame.K_RIGHT,
+    redKeys = {'left': pygame.K_LEFT, 'right': pygame.K_RIGHT,
            'up': pygame.K_UP, 'down': pygame.K_DOWN}
     spaceship1 = Spaceship(100, 200, SPACESHIP_WIDTH, SPACESHIP_HEIGHT, 'spaceship_yellow.png', 90, yellowKeys,maxHealth)
     spaceship2 = Spaceship(700, 300, SPACESHIP_WIDTH, SPACESHIP_HEIGHT, 'spaceship_red.png', 270, redKeys,maxHealth)
@@ -53,8 +53,9 @@ def main():
         if  game.spaceship1.Health <= 0 or  game.spaceship2.Health <= 0:
             break
 
-        game.move(Consts.STEP,spaceship1)
-        game.move(Consts.STEP,spaceship2)
+      
+        game.spaceship1.move(Consts.STEP)
+        game.spaceship2.move(Consts.STEP)
 
         game.handle_bullet()
         game.draw_window()

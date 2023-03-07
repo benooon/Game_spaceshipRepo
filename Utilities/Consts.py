@@ -14,3 +14,4 @@ class Consts:
     YELLOW_HIT = pygame.USEREVENT + 1
     RED_HIT = pygame.USEREVENT + 2
     SPACE = pygame.image.load(os.path.join('Assets','space.jpg'))
+    STONE_WIDTH, STONE_HEIGHT = 66, 66
