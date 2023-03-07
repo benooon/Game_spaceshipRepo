@@ -43,7 +43,7 @@ def main():
                     print(f'{bulletSpaceship2.y=}')
                     print(f'{spaceship1.y=}')
                     game.spaceship2.bullets.append(bulletSpaceship2)
-
+                #changes sides
                 if event.key == pygame.K_RCTRL:
                     game.spaceship2.changeBulletDir()   
                 if event.key == pygame.K_LCTRL:

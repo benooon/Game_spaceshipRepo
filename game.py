@@ -62,7 +62,7 @@ class Game:
         # WINDOW.fill(WHITE)  # מילוי מסך
         self.window.screen.blit(self.window.bg, (0, 0))
 
-        students_names = 'Ben Rosenbaum \nSali Haham \nDorin Averbach'
+        students_names = 'Ben Rosenbaum & Sali Haham & Dorin Averbach'
         pygame.draw.rect(self.window.screen, Consts.BLACK, self.window.border)  # ציור של הבורדר למסך
         self.spaceship1.buildSpaceship(self.window)
         self.spaceship2.buildSpaceship(self.window)
@@ -76,9 +76,10 @@ class Game:
         
 
         for bullet in self.spaceship1.bullets:
-            pygame.draw.rect(self.window.screen, Consts.RED, bullet)
-        for bullet in self.spaceship2.bullets:
             pygame.draw.rect(self.window.screen, Consts.YELLOW, bullet)
+        for bullet in self.spaceship2.bullets:
+            pygame.draw.rect(self.window.screen, Consts.RED, bullet)
+        
         pygame.display.update()  # רענון והזרקת נתונים חדשים למסךS1
         
 
