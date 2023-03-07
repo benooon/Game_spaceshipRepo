@@ -13,5 +13,4 @@ class Consts:
     MAX_Bullet = 3
     YELLOW_HIT = pygame.USEREVENT + 1
     RED_HIT = pygame.USEREVENT + 2
-    SPACE = pygame.image.load(os.path.join('Assets', 'space.png'))
-    STONE_WIDTH, STONE_HEIGHT = 66, 66
+    SPACE = pygame.image.load(os.path.join('Assets','space.jpg'))

@@ -49,6 +49,7 @@ class Game:
             raise TypeError(ErrorHandler.ERROR_SPACESHIP_MUST_BE_SPACESHIP_CLASS)
         self._spaceship2 = value
     
+ 
 
     def startGame(self):
         run = True
@@ -57,16 +58,11 @@ class Game:
         self.spaceship2.buildSpaceship(self.window)
     BLACK = (0, 0, 0)
 
-    def addBulletSpace1(self,bullet):
-        self.spaceship1.bullets.append(bullet)
-        
-    def addBulletSpace2(self,bullet):
-        self.spaceship2.bullets.append(bullet)
-
     def draw_window(self):
         # WINDOW.fill(WHITE)  # מילוי מסך
         self.window.screen.blit(self.window.bg, (0, 0))
 
+        students_names = 'Ben Rosenbaum \nSali Haham \nDorin Averbach'
         pygame.draw.rect(self.window.screen, Consts.BLACK, self.window.border)  # ציור של הבורדר למסך
         self.spaceship1.buildSpaceship(self.window)
         self.spaceship2.buildSpaceship(self.window)
@@ -74,19 +70,20 @@ class Game:
         spaceship2_health_text = Consts.HEALTH_FONT.render("HEALTH " + str(self.spaceship2.Health), 1, Consts.WHITE)
         self.window.screen.blit(spaceship1_health_text,(self.window.width - spaceship1_health_text.get_width() - 10,10))
         self.window.screen.blit(spaceship2_health_text,(10,10))
+        show_students_names = Consts.HEALTH_FONT.render(students_names ,False ,Consts.WHITE)
+        
+        
 
         for bullet in self.spaceship1.bullets:
             pygame.draw.rect(self.window.screen, Consts.RED, bullet)
         for bullet in self.spaceship2.bullets:
             pygame.draw.rect(self.window.screen, Consts.YELLOW, bullet)
         pygame.display.update()  # רענון והזרקת נתונים חדשים למסךS1
-
-
+        
 
     def  handle_bullet(self):
         for bullet in self.spaceship1.bullets:
             bullet.x += Consts.Bullet_Step
-            print(f'{self.spaceship2.y},{bullet.y}')
             if self.spaceship2.colliderect(bullet):
                 pygame.event.post(pygame.event.Event(Consts.YELLOW_HIT))
                 self.spaceship1.bullets.clear()
@@ -103,6 +100,24 @@ class Game:
                 self.spaceship2.bullets.remove(bullet)
 
 
+
+
     def buildSpaceship(self, window :Window):
         window.screen.blit(self.image, (self.x, self.y))
- 
+    
+    def move(self,STEP,spaceship:Spaceship):
+        keys_pressed = pygame.key.get_pressed()
+        if keys_pressed[spaceship.left]:
+            spaceship.x -= STEP
+
+        if keys_pressed[spaceship.right]:
+            spaceship.x += STEP
+
+        if keys_pressed[spaceship.up]:
+            spaceship.y -= STEP
+
+        if keys_pressed[spaceship.down]:
+            spaceship.y += STEP
+
+
+    
