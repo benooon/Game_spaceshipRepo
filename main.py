@@ -16,7 +16,7 @@ def main():
     redKeys = {'left': pygame.K_LEFT, 'right': pygame.K_RIGHT,
            'up': pygame.K_UP, 'down': pygame.K_DOWN}
     spaceship1 = Spaceship(100, 200, Consts.SPACESHIP_WIDTH, Consts.SPACESHIP_HEIGHT, 'spaceship_yellow.png', 90, yellowKeys,Consts.MAX_HEALTH,True)
-    spaceship2 = Spaceship(700, 300, Consts.SPACESHIP_WIDTH, Consts.SPACESHIP_HEIGHT, 'spaceship_red.png', 270, redKeys,Consts.MAX_HEALTH,False)
+    spaceship2 = Spaceship(700, 300, Consts.SPACESHIP_WIDTH, Consts.SPACESHIP_HEIGHT, 'spaceship_red.png', 270, redKeys,1,False)
 
     window = Window(Consts.WINDOW_WIDTH,Consts.WINDOW_HEIGHT,"SpaceShip Game")
     clock = pygame.time.Clock()  # to cDonfig FPS
@@ -57,7 +57,7 @@ def main():
             if event.type == Consts.YELLOW_HIT:
                 game.spaceship1.Health -= 1
         if  game.spaceship1.Health <= 0 or  game.spaceship2.Health <= 0:
-            break
+            game.publishResult()
 
       
         game.spaceship1.move(Consts.STEP,game)

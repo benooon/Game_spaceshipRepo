@@ -3,6 +3,7 @@ import os
 class Consts:
     pygame.font.init()
     HEALTH_FONT = pygame.font.SysFont('comicsans', 40)
+    WINNER_FONT = pygame.font.SysFont('comicsans', 70)
     WHITE = (255, 255, 255)
     PINK = (255,192,203)
     RED = (255, 0, 0)

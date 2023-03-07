@@ -18,41 +18,15 @@ class Spaceship(pygame.Rect):
         super().__init__(x,y,width,height)
         self._height = height
         self._width = width
-        self._x = x
-        self._y = y
         self.Health = Health
         self.image = pygame.transform.rotate(pygame.transform.scale(pygame.image.load(
             os.path.join('Assets', image)), (self._height, self._width)), imageRotate)
         self.left_ = keys['left']
-        self.right = keys['right']
+        self.right_ = keys['right']
         self.up = keys['up']
         self.down = keys['down']
         self.bullets = []
         self.bulletDirRight = bulletDirRight
-
-
-    @property
-    def x(self):
-        return self._x
-
-    @x.setter
-    def x(self, value):
-        if not isinstance(value, int):
-            raise TypeError(ErrorHandler.ERROR_X_MUST_BE_INTEGER)
-        self._x = value
-    
-    
-
-    @property
-    def y(self):
-        return self._y
-
-    @y.setter
-    def y(self, value):
-        if not isinstance(value, int):
-            raise TypeError(ErrorHandler.ERROR_Y_MUST_BE_INTEGER)
-        self._y = value
-
     @property
     def width(self):
         return self._width
@@ -88,7 +62,7 @@ class Spaceship(pygame.Rect):
         keys_pressed = pygame.key.get_pressed()
         if keys_pressed[self.left_]:
             self.move_left(STEP, game.window.width)
-        if keys_pressed[self.right]:
+        if keys_pressed[self.right_]:
             self.move_right(STEP, game.window.width)
         if keys_pressed[self.up]:
             self.move_up(STEP, game.window.height)
@@ -131,6 +105,30 @@ class Spaceship(pygame.Rect):
         self.image = pygame.transform.rotate(self.image, 180)
         self.bullets.clear()
            
+'''
+    @property
+    def x(self):
+        return self.x
+
+    @x.setter
+    def x(self, value):
+        if not isinstance(value, int):
+            raise TypeError(ErrorHandler.ERROR_X_MUST_BE_INTEGER)
+        self.x = value
+    
+    
+
+    @property
+    def y(self):
+        return self.y
+
+    @y.setter
+    def y(self, value):
+        if not isinstance(value, int):
+            raise TypeError(ErrorHandler.ERROR_Y_MUST_BE_INTEGER)
+        self.y = value
+    '''
+
 
 
     
