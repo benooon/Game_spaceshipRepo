@@ -49,7 +49,6 @@ class Game:
             raise TypeError(ErrorHandler.ERROR_SPACESHIP_MUST_BE_SPACESHIP_CLASS)
         self._spaceship2 = value
     
- 
 
     def startGame(self):
         run = True
@@ -57,6 +56,12 @@ class Game:
         self.spaceship1.buildSpaceship(self.window)
         self.spaceship2.buildSpaceship(self.window)
     BLACK = (0, 0, 0)
+
+    def addBulletSpace1(self,bullet):
+        self.spaceship1.bullets.append(bullet)
+        
+    def addBulletSpace2(self,bullet):
+        self.spaceship2.bullets.append(bullet)
 
     def draw_window(self):
         # WINDOW.fill(WHITE)  # מילוי מסך
@@ -82,7 +87,7 @@ class Game:
         for bullet in self.spaceship1.bullets:
             bullet.x += Consts.Bullet_Step
             print(f'{self.spaceship2.y},{bullet.y}')
-            if self.spaceship2.collidedict(bullet):
+            if self.spaceship2.colliderect(bullet):
                 pygame.event.post(pygame.event.Event(Consts.YELLOW_HIT))
                 self.spaceship1.bullets.clear()
             elif bullet.x > self.window.width:
@@ -90,7 +95,6 @@ class Game:
         for bullet in self.spaceship2.bullets:
             bullet.x -= Consts.Bullet_Step
             if self.spaceship1.colliderect(bullet):
-
                 print(self.spaceship1.x,self.spaceship1.y)
                 print(bullet.x,bullet.y)
                 pygame.event.post(pygame.event.Event(Consts.RED_HIT))

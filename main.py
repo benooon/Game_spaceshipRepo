@@ -41,11 +41,12 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LSHIFT and len(game.spaceship1.bullets) < Consts.MAX_Bullet:
                     bulletSpaceship1 = Bullet(spaceship1) 
-                    game.spaceship1.bullets.append(bulletSpaceship1)
+                    game.addBulletSpace1(bulletSpaceship1)
+
 
                 if event.key == pygame.K_RSHIFT and len(game.spaceship2.bullets) < Consts.MAX_Bullet:
                     bulletSpaceship2 = Bullet(spaceship2)
-                    game.spaceship2.bullets.append(bulletSpaceship2)
+                    game.addBulletSpace2(bulletSpaceship2)
 
             if event.type == Consts.RED_HIT:
                 game.spaceship2.Health -= 1

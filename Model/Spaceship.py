@@ -101,7 +101,6 @@ class Spaceship(pygame.Rect):
 
 
 
-
     def buildSpaceship(self, window: Window):
         window.screen.blit(self.image, (self.x, self.y))
            
