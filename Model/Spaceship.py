@@ -85,10 +85,9 @@ class Spaceship(pygame.Rect):
     def move(self, STEP):
         pygame.init()
         keys_pressed = pygame.key.get_pressed()
-        if keys_pressed[self.left_]:
+        if keys_pressed[self.left_] :
             print(self.x)
             self.x -= STEP
-           
         if keys_pressed[self.right]:
             self.x += STEP
             print(self.x)

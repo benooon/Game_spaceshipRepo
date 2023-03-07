@@ -70,7 +70,8 @@ class Game:
         spaceship2_health_text = Consts.HEALTH_FONT.render("HEALTH " + str(self.spaceship2.Health), 1, Consts.WHITE)
         self.window.screen.blit(spaceship1_health_text,(self.window.width - spaceship1_health_text.get_width() - 10,10))
         self.window.screen.blit(spaceship2_health_text,(10,10))
-        show_students_names = Consts.HEALTH_FONT.render(students_names ,False ,Consts.WHITE)
+        show_students_names = Consts.HEALTH_FONT.render(students_names ,False ,Consts.PINK)
+        self.window.screen.blit(show_students_names,(10,550))
         
         
 
@@ -105,19 +106,5 @@ class Game:
     def buildSpaceship(self, window :Window):
         window.screen.blit(self.image, (self.x, self.y))
     
-    def move(self,STEP,spaceship:Spaceship):
-        keys_pressed = pygame.key.get_pressed()
-        if keys_pressed[spaceship.left]:
-            spaceship.x -= STEP
-
-        if keys_pressed[spaceship.right]:
-            spaceship.x += STEP
-
-        if keys_pressed[spaceship.up]:
-            spaceship.y -= STEP
-
-        if keys_pressed[spaceship.down]:
-            spaceship.y += STEP
-
 
     
