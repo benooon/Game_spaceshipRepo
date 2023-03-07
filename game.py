@@ -1,6 +1,6 @@
 from Utilities.ErrorHandler import ErrorHandler
 from Model.Spaceship import  Spaceship
-from Window import * 
+from Model.Window import * 
 from Utilities.Consts import *
 import pygame
 
@@ -84,14 +84,20 @@ class Game:
 
     def  handle_bullet(self):
         for bullet in self.spaceship1.bullets:
-            bullet.x += Consts.Bullet_Step
+            if self.spaceship1.bulletDirRight:
+                bullet.x += Consts.Bullet_Step
+            else:
+                bullet.x -= Consts.Bullet_Step
             if self.spaceship2.colliderect(bullet):
                 pygame.event.post(pygame.event.Event(Consts.YELLOW_HIT))
                 self.spaceship1.bullets.clear()
             elif bullet.x > self.window.width:
                 self.spaceship1.bullets.remove(bullet)
         for bullet in self.spaceship2.bullets:
-            bullet.x -= Consts.Bullet_Step
+            if self.spaceship2.bulletDirRight:
+                bullet.x += Consts.Bullet_Step
+            else:
+                bullet.x -= Consts.Bullet_Step
             if self.spaceship1.colliderect(bullet):
                 print(self.spaceship1.x,self.spaceship1.y)
                 print(bullet.x,bullet.y)

@@ -4,7 +4,7 @@ import os
 from Model.Spaceship import Spaceship
 from Utilities.Consts import Consts
 from game import *
-from Window import *
+from Model.Window import *
 from Model.Bullet import *
 
 
@@ -15,11 +15,11 @@ def main():
               'up': pygame.K_r, 'down': pygame.K_f}  
     redKeys = {'left': pygame.K_LEFT, 'right': pygame.K_RIGHT,
            'up': pygame.K_UP, 'down': pygame.K_DOWN}
-    spaceship1 = Spaceship(100, 200, Consts.SPACESHIP_WIDTH, Consts.SPACESHIP_HEIGHT, 'spaceship_yellow.png', 90, yellowKeys,Consts.MAX_HEALTH)
-    spaceship2 = Spaceship(700, 300, Consts.SPACESHIP_WIDTH, Consts.SPACESHIP_HEIGHT, 'spaceship_red.png', 270, redKeys,Consts.MAX_HEALTH)
+    spaceship1 = Spaceship(100, 200, Consts.SPACESHIP_WIDTH, Consts.SPACESHIP_HEIGHT, 'spaceship_yellow.png', 90, yellowKeys,Consts.MAX_HEALTH,True)
+    spaceship2 = Spaceship(700, 300, Consts.SPACESHIP_WIDTH, Consts.SPACESHIP_HEIGHT, 'spaceship_red.png', 270, redKeys,Consts.MAX_HEALTH,False)
 
     window = Window(Consts.WINDOW_WIDTH,Consts.WINDOW_HEIGHT,"SpaceShip Game")
-    clock = pygame.time.Clock()  # to config FPS
+    clock = pygame.time.Clock()  # to cDonfig FPS
     run = True
     game = Game(spaceship1,spaceship2,window)
     while run:
@@ -44,6 +44,11 @@ def main():
                     print(f'{spaceship1.y=}')
                     game.spaceship2.bullets.append(bulletSpaceship2)
 
+                if event.key == pygame.K_RCTRL:
+                    game.spaceship2.changeBulletDir()   
+                if event.key == pygame.K_LCTRL:
+                    game.spaceship1.changeBulletDir()                            
+
             if event.type == Consts.RED_HIT:
                 game.spaceship2.Health -= 1
             if event.type == Consts.YELLOW_HIT:
@@ -52,8 +57,8 @@ def main():
             break
 
       
-        game.spaceship1.move(Consts.STEP)
-        game.spaceship2.move(Consts.STEP)
+        game.spaceship1.move(Consts.STEP,game)
+        game.spaceship2.move(Consts.STEP,game)
 
         game.handle_bullet()
         game.draw_window()

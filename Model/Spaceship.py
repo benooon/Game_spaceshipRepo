@@ -1,10 +1,10 @@
 import pygame
 import os
-from Window import Window
+from Model.Window import *
 from Utilities.ErrorHandler import ErrorHandler
 
 class Spaceship(pygame.Rect):
-    def __init__(self, x, y, width, height, image, imageRotate, keys, Health):
+    def __init__(self, x, y, width, height, image, imageRotate, keys, Health,bulletDirRight:bool):
         if not isinstance(x, int):
             raise TypeError(ErrorHandler.ERROR_X_MUST_BE_INTEGER)
         if not isinstance(y, int):
@@ -28,6 +28,7 @@ class Spaceship(pygame.Rect):
         self.up = keys['up']
         self.down = keys['down']
         self.bullets = []
+        self.bulletDirRight = bulletDirRight
 
 
     @property
@@ -81,27 +82,54 @@ class Spaceship(pygame.Rect):
         if not isinstance(value, int):
             raise ValueError(ErrorHandler.ERROR_MAX_HEALTH_MUST_BE_INTEGER)
         self._Health = value
-
-    def move(self, STEP):
+            
+    def move(self, STEP, game):
         pygame.init()
         keys_pressed = pygame.key.get_pressed()
-        if keys_pressed[self.left_] :
-            print(self.x)
-            self.x -= STEP
+        if keys_pressed[self.left_]:
+            self.move_left(STEP, game.window.width)
         if keys_pressed[self.right]:
-            self.x += STEP
-            print(self.x)
+            self.move_right(STEP, game.window.width)
         if keys_pressed[self.up]:
-            self.y -= STEP
-            print(self.y)
+            self.move_up(STEP, game.window.height)
         if keys_pressed[self.down]:
+            self.move_down(STEP, game.window.height)
+
+    def move_left(self, STEP, window_width):
+        if self.x - STEP < 0:
+            self.x = window_width - STEP
+        else:
+            self.x -= STEP
+
+    def move_right(self, STEP, window_width):
+        if self.x + self.width + STEP > window_width:
+            self.x = 0
+        else:
+            self.x += STEP
+
+    def move_up(self, STEP, window_height):
+        if self.y - STEP < 0:
+            self.y = window_height - STEP
+        else:
+            self.y -= STEP
+
+    def move_down(self, STEP, window_height):
+        if self.y + self.height + STEP > window_height:
+            self.y = 0
+        else:
             self.y += STEP
-            print(self.y)
 
 
 
     def buildSpaceship(self, window: Window):
         window.screen.blit(self.image, (self.x, self.y))
+
+
+
+    def changeBulletDir(self):
+        self.bulletDirRight = not self.bulletDirRight
+        self.image = pygame.transform.rotate(self.image, 180)
+        self.bullets.clear()
            
 
 
