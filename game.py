@@ -17,6 +17,7 @@ class Game:
         self.spaceship1 = spaceship1
         self.spaceship2 = spaceship2
         self.window = window
+        self.isEnd = False 
 
     
     @property
@@ -63,7 +64,6 @@ class Game:
         self.window.screen.blit(self.window.bg, (0, 0))
 
         students_names = 'Ben Rosenbaum & Sali Haham & Dorin Averbach'
-        pygame.draw.rect(self.window.screen, Consts.BLACK, self.window.border)  # ציור של הבורדר למסך
         self.spaceship1.buildSpaceship(self.window)
         self.spaceship2.buildSpaceship(self.window)
         spaceship1_health_text = Consts.HEALTH_FONT.render("HEALTH " + str(self.spaceship1.Health), 1, Consts.WHITE)
@@ -80,10 +80,19 @@ class Game:
         for bullet in self.spaceship2.bullets:
             pygame.draw.rect(self.window.screen, Consts.RED, bullet)
         
+        if self.isEnd:
+            spaceShipWin = 'right spaceship'
+            if self.spaceship1.Health == 0:
+                spaceShipWin = 'left spaceship'
+            finishText = Consts.WINNER_FONT.render("the winner is:  " + spaceShipWin, 1, Consts.BLACK)
+            self.window.screen.blit(finishText,(300,200))
         pygame.display.update()  # רענון והזרקת נתונים חדשים למסךS1
+        
         
     def isCollide(self,obj1,obj2):
         return obj1.colliderect(obj2)
+    
+
     
     def  handle_bullet(self):
         for bullet in self.spaceship1.bullets:
@@ -108,6 +117,11 @@ class Game:
                 self.spaceship2.bullets.remove(bullet)
 
 
+
+    def publishResult(self):
+        self.isEnd=True
+        
+        
 
 
     def buildSpaceship(self, window :Window):
