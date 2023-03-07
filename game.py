@@ -71,7 +71,7 @@ class Game:
         self.window.screen.blit(spaceship1_health_text,(self.window.width - spaceship1_health_text.get_width() - 10,10))
         self.window.screen.blit(spaceship2_health_text,(10,10))
         show_students_names = Consts.HEALTH_FONT.render(students_names ,False ,Consts.PINK)
-        self.window.screen.blit(show_students_names,(10,550))
+        self.window.screen.blit(show_students_names,(5,550))
         
         
 
@@ -86,6 +86,10 @@ class Game:
                 spaceShipWin = 'left spaceship'
             finishText = Consts.WINNER_FONT.render("the winner is:  " + spaceShipWin, 1, Consts.BLACK)
             self.window.screen.blit(finishText,(300,200))
+            pygame.time.delay(5)
+            
+            
+            
         pygame.display.update()  # רענון והזרקת נתונים חדשים למסךS1
         
         
@@ -102,7 +106,7 @@ class Game:
                 bullet.x -= Consts.Bullet_Step
             if self.isCollide(self.spaceship2,bullet):
                 pygame.event.post(pygame.event.Event(Consts.YELLOW_HIT))
-                self.spaceship1.bullets.clear()
+                self.spaceship1.bullets.remove(bullet)
             elif bullet.x > self.window.width or  bullet.x <0:
                 self.spaceship1.bullets.remove(bullet)
         for bullet in self.spaceship2.bullets:
@@ -112,7 +116,7 @@ class Game:
                 bullet.x -= Consts.Bullet_Step
             if self.isCollide(self.spaceship1,bullet):
                 pygame.event.post(pygame.event.Event(Consts.RED_HIT))
-                self.spaceship2.bullets.clear()
+                self.spaceship2.bullets.remove(bullet)
             elif bullet.x < 0 or bullet.x>self.window.width:
                 self.spaceship2.bullets.remove(bullet)
 
