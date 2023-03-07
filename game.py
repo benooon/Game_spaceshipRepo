@@ -82,29 +82,29 @@ class Game:
         
         pygame.display.update()  # רענון והזרקת נתונים חדשים למסךS1
         
-
+    def isCollide(self,obj1,obj2):
+        return obj1.colliderect(obj2)
+    
     def  handle_bullet(self):
         for bullet in self.spaceship1.bullets:
             if self.spaceship1.bulletDirRight:
                 bullet.x += Consts.Bullet_Step
             else:
                 bullet.x -= Consts.Bullet_Step
-            if self.spaceship2.colliderect(bullet):
+            if self.isCollide(self.spaceship2,bullet):
                 pygame.event.post(pygame.event.Event(Consts.YELLOW_HIT))
                 self.spaceship1.bullets.clear()
-            elif bullet.x > self.window.width:
+            elif bullet.x > self.window.width or  bullet.x <0:
                 self.spaceship1.bullets.remove(bullet)
         for bullet in self.spaceship2.bullets:
             if self.spaceship2.bulletDirRight:
                 bullet.x += Consts.Bullet_Step
             else:
                 bullet.x -= Consts.Bullet_Step
-            if self.spaceship1.colliderect(bullet):
-                print(self.spaceship1.x,self.spaceship1.y)
-                print(bullet.x,bullet.y)
+            if self.isCollide(self.spaceship1,bullet):
                 pygame.event.post(pygame.event.Event(Consts.RED_HIT))
                 self.spaceship2.bullets.clear()
-            elif bullet.x < 0:
+            elif bullet.x < 0 or bullet.x>self.window.width:
                 self.spaceship2.bullets.remove(bullet)
 
 

@@ -37,12 +37,15 @@ def main():
                     print(f'{bulletSpaceship1.y=}')
                     print(f'{spaceship2.y=}')
                     game.spaceship1.bullets.append(bulletSpaceship1)
+                    print(  game.spaceship1.bullets)
 
                 if event.key == pygame.K_RSHIFT and len(game.spaceship2.bullets) < Consts.MAX_Bullet:
                     bulletSpaceship2 = Bullet(spaceship2)
                     print(f'{bulletSpaceship2.y=}')
                     print(f'{spaceship1.y=}')
                     game.spaceship2.bullets.append(bulletSpaceship2)
+                    print(game.spaceship2.bullets)
+
                 #changes sides
                 if event.key == pygame.K_RCTRL:
                     game.spaceship2.changeBulletDir()   
