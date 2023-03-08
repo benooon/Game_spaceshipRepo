@@ -16,6 +16,8 @@ class Consts:
     YELLOW_HIT = pygame.USEREVENT + 1
     RED_HIT = pygame.USEREVENT + 2
     SPACE = pygame.image.load(os.path.join('Assets','space.jpg'))
+    SOUND_SHOOT = os.path.join('Assets','Sound.mp3')
+    GENERAL_SOUND = os.path.join('Assets','GeneralSound.mp3')
     STONE_WIDTH, STONE_HEIGHT = 66, 66
     SPACESHIP_WIDTH, SPACESHIP_HEIGHT = 77, 66
     MAX_HEALTH = 10

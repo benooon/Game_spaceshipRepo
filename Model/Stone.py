@@ -7,18 +7,31 @@ class Stone:
         self.y = y
         self.width = width
         self.height = height
-        self.image = pygame.transform.rotate(pygame.transform.scale(pygame.image.load(
-            os.path.join('Assets', image)), (self.height, self.width)), imageRotate)
+
         self.movement = keys['movement']
         self.moveRight = True
         # self.right = keys['right']
 
-    def move(self, STEP):
-        
-        keys_pressed = pygame.key.get_pressed()
-        if keys_pressed[self.movement] and bool(random.getrandbits(1)):
-            if bool(random.getrandbits(1)):
-                self.x -= STEP
-            else:
-                self.x += STEP
-            
+import pygame
+import random
+
+class RandomObstacle(pygame.sprite.Sprite):
+    def __init__(self, screen_width, screen_height,width,hight):
+        super().__init__()
+        self.screen_width = screen_width
+        self.screen_height = screen_height
+        self.width = width
+        self.hight = hight
+        self.image = pygame.transform.scale(pygame.image.load(os.path.join('Assets', 'stone.png')), (self.width, self.hight))
+        self.rect = self.image.get_rect()
+        self.rect.x = random.randint(0, screen_width - self.rect.width)
+        self.rect.y = random.randint(0, screen_height - self.rect.height)
+
+    def update(self):
+        self.rect.move_ip(random.randint(-5, 5), random.randint(-5, 5))
+
+    def collide(self, sprite):
+        if self.rect.colliderect(sprite.rect):
+            return True
+        return False
+
