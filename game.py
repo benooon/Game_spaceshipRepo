@@ -96,6 +96,14 @@ class Game:
     def isCollide(self,obj1,obj2):
         return obj1.colliderect(obj2)
     
+    def isBulletesCollide(self,bulet,spaceShip:Spaceship):
+        for b in spaceShip.bullets:
+            if self.isCollide(b,bulet):
+                spaceShip.bullets.remove(b)
+                return True
+                break
+        return False
+    
 
     
     def  handle_bullet(self):
@@ -107,6 +115,9 @@ class Game:
             if self.isCollide(self.spaceship2,bullet):
                 pygame.event.post(pygame.event.Event(Consts.YELLOW_HIT))
                 self.spaceship1.bullets.remove(bullet)
+            elif self.isBulletesCollide(bullet,self.spaceship2):
+                self.spaceship1.bullets.remove(bullet)
+
             elif bullet.x > self.window.width or  bullet.x <0:
                 self.spaceship1.bullets.remove(bullet)
         for bullet in self.spaceship2.bullets:
@@ -116,6 +127,8 @@ class Game:
                 bullet.x -= Consts.Bullet_Step
             if self.isCollide(self.spaceship1,bullet):
                 pygame.event.post(pygame.event.Event(Consts.RED_HIT))
+                self.spaceship2.bullets.remove(bullet)
+            elif self.isBulletesCollide(bullet,self.spaceship1):
                 self.spaceship2.bullets.remove(bullet)
             elif bullet.x < 0 or bullet.x>self.window.width:
                 self.spaceship2.bullets.remove(bullet)
